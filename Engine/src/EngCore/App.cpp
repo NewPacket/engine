@@ -1,5 +1,6 @@
 #include "App.h"
 
+
 namespace EngX {
 
 	App::App()
@@ -13,6 +14,9 @@ namespace EngX {
 
 	int App::Run() 
 	{
+		Log::Init();
+		WindowResizeEvent e {1200, 720};
+		EX_TRACE(e);
 		while (true)
 		{
 		}

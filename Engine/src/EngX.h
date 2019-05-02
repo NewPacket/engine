@@ -2,10 +2,10 @@
 
 //API exposure
 
-#include "core\App.h"
+#include "EngCore\App.h"
 
 // --  Entry point
 
-#include "core\EntryPoint.h"
+#include "EngCore\EntryPoint.h"
 
 //

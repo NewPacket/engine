@@ -1,6 +1,7 @@
 #pragma once
-
-#include "Core.h"
+#include "EngCore\Log.h"
+#include "EngCore\Events\ApplicationEvent.h"
+#include "EngCore\Core.h"
 
 namespace EngX {
 

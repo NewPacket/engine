@@ -1,8 +1,8 @@
 #Directories
 .git/
 .vs/
-build/
-build-intermid/
+bin/
+bin-int/
 
 #VS files
 *.user
