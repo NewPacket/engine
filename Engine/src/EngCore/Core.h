@@ -10,4 +10,12 @@
 	#error Only for Win
 #endif
 
+#ifdef EX_ENABLE_ASSERTS
+	#define EX_ASSERT(x, ...) { if(!(x))	  { EX_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define EX_CORE_ASSERT(x, ...) { if(!(x)) { EX_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#else
+	#define EX_ASSERT(x, ...)
+	#define EX_CORE_ASSERT(x, ...)
+#endif
+
 #define BIT(x) (1 << x)

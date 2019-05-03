@@ -1,4 +1,5 @@
-#include "Log.h"
+#include "eng_pch.h"
+
 
 namespace EngX {
 
@@ -11,8 +12,10 @@ namespace EngX {
 
 		core_logger = spdlog::stdout_color_mt("ENGINE");
 		core_logger->set_level(spdlog::level::trace);
+		EX_CORE_TRACE("Inited log for engine")
 
 		client_logger = spdlog::stdout_color_mt("APP");
 		client_logger->set_level(spdlog::level::trace);
+		EX_INFO("Inited log for client")
 	}
 }

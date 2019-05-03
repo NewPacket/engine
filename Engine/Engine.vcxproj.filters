@@ -7,6 +7,12 @@
     <Filter Include="EngCore\Events">
       <UniqueIdentifier>{0C82275A-F84F-1B60-E1E3-8B86CD50F7C4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngCore\Platform">
+      <UniqueIdentifier>{7C3C2E9E-6835-4DF0-9167-32757DBF2CFC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngCore\Platform\Win">
+      <UniqueIdentifier>{5960CB4B-45EF-5415-EE0D-6910DA7B65BB}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EngCore\App.h">
@@ -33,7 +39,14 @@
     <ClInclude Include="src\EngCore\Log.h">
       <Filter>EngCore</Filter>
     </ClInclude>
+    <ClInclude Include="src\EngCore\Platform\Win\WindowWin.h">
+      <Filter>EngCore\Platform\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngCore\Window.h">
+      <Filter>EngCore</Filter>
+    </ClInclude>
     <ClInclude Include="src\EngX.h" />
+    <ClInclude Include="src\eng_pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EngCore\App.cpp">
@@ -42,5 +55,9 @@
     <ClCompile Include="src\EngCore\Log.cpp">
       <Filter>EngCore</Filter>
     </ClCompile>
+    <ClCompile Include="src\EngCore\Platform\Win\WindowWin.cpp">
+      <Filter>EngCore\Platform\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\eng_pch.cpp" />
   </ItemGroup>
 </Project>

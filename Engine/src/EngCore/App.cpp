@@ -1,10 +1,12 @@
+#include "eng_pch.h"
 #include "App.h"
-
 
 namespace EngX {
 
 	App::App()
 	{
+		Log::Init();
+		windowHandle = std::unique_ptr<Window>(Window::Create());
 	}
 
 
@@ -12,13 +14,15 @@ namespace EngX {
 	{
 	}
 
+
 	int App::Run() 
 	{
-		Log::Init();
 		WindowResizeEvent e {1200, 720};
 		EX_TRACE(e);
-		while (true)
+		while (running)
 		{
+			windowHandle->OnUpdate();
 		}
+		return 0;
 	}
 }

@@ -2,8 +2,8 @@
 
 #include "EngCore\Core.h"
 
-#include <string>
-#include <functional>
+//#include <string>
+//#include <functional>
 
 namespace EngX {
 	//Currently event handling is blocking
