@@ -3,6 +3,8 @@
 //API exposure
 
 #include "EngCore\App.h"
+#include "EngCore\Layers\Layer.h"
+#include "EngCore\Log.h"
 
 // --  Entry point
 

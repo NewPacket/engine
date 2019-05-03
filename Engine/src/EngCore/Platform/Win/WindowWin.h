@@ -1,8 +1,9 @@
 #pragma once
-#pragma once
 
 #include "EngCore/Window.h"
-#include <GLFW/glfw3.h>
+
+
+struct GLFWwindow;
 
 namespace EngX {
 

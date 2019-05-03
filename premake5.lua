@@ -14,8 +14,10 @@ currentSysVer = "latest"
 --Include dirs relative to root folder
 IncludeDir = {}
 IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+IncludeDir["Glad"] = "Engine/vendor/Glad/include"
 
 include "Engine/vendor/GLFW"
+include "Engine/vendor/Glad"
 
 project "Engine"
 	location "Engine"
@@ -38,12 +40,14 @@ project "Engine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -56,7 +60,8 @@ project "Engine"
 		{
 			"EX_PLATFORM_WIN",
 			"EX_BUILD_DLL",
-			"EX_ENABLE_ASSERTS"
+			"EX_ENABLE_ASSERTS",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
@@ -66,14 +71,17 @@ project "Engine"
 
 	filter "configurations:Debug"
 		defines "EX_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "EX_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "EX_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "sandbox"
@@ -92,6 +100,7 @@ project "sandbox"
 
 	includedirs
 	{
+		"Engine/vendor/GLFW/include",
 		"Engine/vendor/spdlog/include",
 		"Engine/src"
 	}
@@ -113,12 +122,15 @@ project "sandbox"
 
 	filter "configurations:Debug"
 		defines "EX_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "EX_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "EX_DIST"
+		buildoptions "/MD"
 		optimize "On"

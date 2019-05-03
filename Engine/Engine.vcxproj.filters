@@ -7,6 +7,9 @@
     <Filter Include="EngCore\Events">
       <UniqueIdentifier>{0C82275A-F84F-1B60-E1E3-8B86CD50F7C4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngCore\Layers">
+      <UniqueIdentifier>{E76C0A69-D33A-FE6E-BCCE-6E95A83BDAD3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="EngCore\Platform">
       <UniqueIdentifier>{7C3C2E9E-6835-4DF0-9167-32757DBF2CFC}</UniqueIdentifier>
     </Filter>
@@ -36,6 +39,12 @@
     <ClInclude Include="src\EngCore\Events\MouseEvent.h">
       <Filter>EngCore\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\EngCore\Layers\Layer.h">
+      <Filter>EngCore\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngCore\Layers\LayerStack.h">
+      <Filter>EngCore\Layers</Filter>
+    </ClInclude>
     <ClInclude Include="src\EngCore\Log.h">
       <Filter>EngCore</Filter>
     </ClInclude>
@@ -51,6 +60,12 @@
   <ItemGroup>
     <ClCompile Include="src\EngCore\App.cpp">
       <Filter>EngCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngCore\Layers\Layer.cpp">
+      <Filter>EngCore\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngCore\Layers\LayerStack.cpp">
+      <Filter>EngCore\Layers</Filter>
     </ClCompile>
     <ClCompile Include="src\EngCore\Log.cpp">
       <Filter>EngCore</Filter>

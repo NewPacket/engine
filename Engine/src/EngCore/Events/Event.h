@@ -45,29 +45,29 @@ namespace EngX {
 			return GetCategoryFlags() & category;
 		}
 
-		bool m_Handled = false;
+		bool isHandled = false;
 	};
 
 	struct EventDispatcher
 	{
 		template<typename T>
-		using EventFn = std::function<bool(T&)>;//[](T&) -> bool; bool (*f)(T&);
+		using EventFn = std::function<bool(T&)>;//(*foo)(bool);;//(*bool)(T&); //;//[](T&) -> bool; ;
 
 		EventDispatcher(Event& event)
-			: m_Event(event) {}
+			: event(event) {}
 
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticType())
+			if (event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)& m_Event);
+				event.isHandled = func(*(T*)& event);
 				return true;
 			}
 			return false;
 		}
 
-		Event& m_Event;
+		Event& event;
 	};
 
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
