@@ -15,17 +15,24 @@ namespace EngX {
 		int Run();
 
 		void OnEvent(Event&);
+
+		inline static App& App::AppRef() { return *appInstance_; };
+		inline Window& WindowRef() { return *windowHandle_; };
+
 		bool OnWindowCloseEvent(WindowCloseEvent& e);
 
 		void PushLayer(Layer* layer);
 		void PushOverLay(Layer* overlay);
 
-		LayerStack layerStack;
+		static App* appInstance_;
+		std::unique_ptr<Window> windowHandle_;
+
+		bool running_{ true };
+		LayerStack layerStack_;
 	};
 
 	App* CreateApp();
+	
 
-	std::unique_ptr<Window> windowHandle;
-	bool running{ true };
 }
 

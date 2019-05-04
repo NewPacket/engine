@@ -34,9 +34,9 @@ namespace EngX {
 
 	void WindowWin::Init(const WindowProps& props)
 	{
-		windowData.Title = props.Title;
-		windowData.Width = props.Width;
-		windowData.Height = props.Height;
+		windowData_.title = props.Title;
+		windowData_.width = props.Width;
+		windowData_.height = props.Height;
 
 		EX_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
@@ -50,79 +50,94 @@ namespace EngX {
 			s_GLFWInitialized = true;
 		}
 
-		Window = glfwCreateWindow((int)props.Width, (int)props.Height, windowData.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(Window);
+		window_ = glfwCreateWindow((int)props.Width, (int)props.Height, windowData_.title.c_str(), nullptr, nullptr);
+		glfwMakeContextCurrent(window_);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		EX_CORE_ASSERT(status, "Failed to initialize Glad");
-		glfwSetWindowUserPointer(Window, &windowData);
+		glfwSetWindowUserPointer(window_, &windowData_);
 		SetVSync(true);
 
 		//Set GLFW callbacks
-		glfwSetWindowSizeCallback(Window, []( GLFWwindow* window, int width , int height) 
+		glfwSetWindowSizeCallback(window_, []( GLFWwindow* window, int width , int height) 
 		{
 			WindowData& data = *(WindowData*) glfwGetWindowUserPointer(window);
-			data.Width = width;
-			data.Height = height;
+			data.width = width;
+			data.height = height;
 
 			data.EventCallback(WindowResizeEvent{ (unsigned int) width, (unsigned int) height });
 		});
 
-		glfwSetWindowCloseCallback(Window, [](GLFWwindow * window)
+		glfwSetWindowCloseCallback(window_, [](GLFWwindow * window)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			data.EventCallback(WindowCloseEvent());
 		});
 
-		glfwSetKeyCallback(Window, [](GLFWwindow * window, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(window_, [](GLFWwindow * window, int key, int scancode, int action, int mods)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			//TODO:: Try to make it through immidiate lambda exec
 			switch (action)
 			{
 				case GLFW_PRESS:
+				{
 					data.EventCallback(KeyPressedEvent{ key, 0 });
+					break;
+				}
 				case GLFW_RELEASE:
+				{
 					data.EventCallback(KeyReleasedEvent{ key });
+					break;
+				}
 				case GLFW_REPEAT:
+				{
 					data.EventCallback(KeyPressedEvent{ key, 1 });
+					break;
+				}
 			};
 		});
 
-		glfwSetMouseButtonCallback(Window, [](GLFWwindow * window, int button, int action, int mod)
+		glfwSetMouseButtonCallback(window_, [](GLFWwindow * window, int button, int action, int mod)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			switch (action)
 			{
 				case GLFW_PRESS:
+				{
 					data.EventCallback(MouseButtonPressedEvent{ button });
+					break;
+				}
 				case GLFW_RELEASE:
+				{
 					data.EventCallback(MouseButtonReleasedEvent{ button });
+					break;
+				}
 			};
 
 		});
 
-		glfwSetScrollCallback(Window, [](GLFWwindow * window, double xOffset, double yOffset) 
+		glfwSetScrollCallback(window_, [](GLFWwindow * window, double xOffset, double yOffset) 
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			data.EventCallback(MouseScrolledEvent{ (float)xOffset, (float) yOffset});
 		});
 
-		glfwSetCursorPosCallback(Window, [](GLFWwindow * window, double xPos , double yPos)
+		glfwSetCursorPosCallback(window_, [](GLFWwindow * window, double xPos , double yPos)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-			data.EventCallback(MouseMovedEvent{ (float)xPos, (float)xPos });
+			data.EventCallback(MouseMovedEvent{ (float)xPos, (float)yPos });
 		});
 	}
 
 	void WindowWin::Shutdown()
 	{
-		glfwDestroyWindow(Window);
+		glfwDestroyWindow(window_);
 	}
 
 	void WindowWin::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(Window);
+		glfwSwapBuffers(window_);
 	}
 
 	void WindowWin::SetVSync(bool enabled)
@@ -132,12 +147,12 @@ namespace EngX {
 		else
 			glfwSwapInterval(0);
 
-		windowData.VSync = enabled;
+		windowData_.VSync = enabled;
 	}
 
 	bool WindowWin::IsVSync() const
 	{
-		return windowData.VSync;
+		return windowData_.VSync;
 	}
 
 }

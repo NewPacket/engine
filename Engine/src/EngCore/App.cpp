@@ -5,11 +5,15 @@
 
 namespace EngX {
 
+	App* App::appInstance_ = nullptr;
+
 	App::App()
 	{
+		EX_CORE_ASSERT(appInstance_ == nullptr,"App instance already created");
 		Log::Init();
-		windowHandle = std::unique_ptr<Window>(Window::Create());
-		windowHandle->SetEventCallback([this](Event& e) { OnEvent(e); });
+		windowHandle_ = std::unique_ptr<Window>(Window::Create());
+		windowHandle_->SetEventCallback([this](Event& e) { OnEvent(e); });
+		appInstance_ = this;
 	}
 
 
@@ -22,28 +26,30 @@ namespace EngX {
 	{
 		WindowResizeEvent e {1200, 720};
 		EX_TRACE(e);
-		while (running)
+		while (running_)
 		{
 			glClearColor(0,0,1,1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			for (Layer* layer : layerStack)
+			for (Layer* layer : layerStack_)
 				layer->OnUpdate();
 
-			windowHandle->OnUpdate();
+			windowHandle_->OnUpdate();
 		}
 		return 0;
 	}
 
 	void App::PushLayer(Layer* layer)
 	{
-		layerStack.PushLayer(layer);
+		layerStack_.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 
 	void App::PushOverLay(Layer* overlay)
 	{
-		layerStack.PushOverlay(overlay);
+		layerStack_.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 
@@ -52,7 +58,7 @@ namespace EngX {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>([this](WindowCloseEvent & e) {return OnWindowCloseEvent(e); });
 
-		for (auto it = layerStack.end(); it != layerStack.begin(); )
+		for (auto it = layerStack_.end(); it != layerStack_.begin(); )
 		{
 			(*--it)->OnEvent(e);
 			if (e.isHandled)
@@ -66,7 +72,7 @@ namespace EngX {
 
 	bool App::OnWindowCloseEvent(WindowCloseEvent& e)
 	{
-		running = false;
+		running_ = false;
 		return true;
 	}
 }

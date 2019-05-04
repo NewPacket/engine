@@ -15,9 +15,11 @@ currentSysVer = "latest"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
 IncludeDir["Glad"] = "Engine/vendor/Glad/include"
+IncludeDir["ImGui"] = "Engine/vendor/DearImGui"
 
 include "Engine/vendor/GLFW"
 include "Engine/vendor/Glad"
+include "Engine/vendor/DearImGui"
 
 project "Engine"
 	location "Engine"
@@ -41,13 +43,15 @@ project "Engine"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}",
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"DearImGUI",
 		"opengl32.lib"
 	}
 

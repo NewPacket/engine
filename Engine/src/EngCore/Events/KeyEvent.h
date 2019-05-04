@@ -51,4 +51,19 @@ namespace EngX {
 
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	struct EX_API KeyTypedEvent : KeyEvent
+	{
+		KeyTypedEvent(int keycode)
+			: KeyEvent(keycode) {}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyReleasedEvent: " << m_KeyCode;
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(KeyReleased)
+	};
 }

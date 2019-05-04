@@ -15,11 +15,11 @@ namespace EngX {
 
 		void OnUpdate() override;
 
-		inline uint16_t GetWidth() const override { return windowData.Width; }
-		inline uint16_t GetHeight() const override { return windowData.Height; }
+		inline uint16_t GetWidth() const override { return windowData_.width; }
+		inline uint16_t GetHeight() const override { return windowData_.height; }
 
 
-		virtual void SetEventCallback(const EventCallbackFn& callback) override { windowData.EventCallback = callback; }
+		virtual void SetEventCallback(const EventCallbackFn& callback) override { windowData_.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 
 		bool IsVSync() const override;
@@ -27,18 +27,18 @@ namespace EngX {
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 
-		GLFWwindow* Window;
+		
 
 		struct WindowData
 		{
-			std::string Title;
-			uint16_t Width, Height;
+			std::string title;
+			uint16_t width, height;
 			bool VSync;
 
 			EventCallbackFn EventCallback;
-		};
+		} windowData_;
 
-		WindowData windowData;
+		GLFWwindow* window_;
 	};
 
 }

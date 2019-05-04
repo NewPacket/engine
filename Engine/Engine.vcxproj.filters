@@ -7,11 +7,17 @@
     <Filter Include="EngCore\Events">
       <UniqueIdentifier>{0C82275A-F84F-1B60-E1E3-8B86CD50F7C4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EngCore\ImGui">
+      <UniqueIdentifier>{5226441A-BEE6-BF50-8721-09CEF3A0042D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="EngCore\Layers">
       <UniqueIdentifier>{E76C0A69-D33A-FE6E-BCCE-6E95A83BDAD3}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngCore\Platform">
       <UniqueIdentifier>{7C3C2E9E-6835-4DF0-9167-32757DBF2CFC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngCore\Platform\OpenGL">
+      <UniqueIdentifier>{308292DE-9CB9-DA75-A5C3-3E99117A016F}</UniqueIdentifier>
     </Filter>
     <Filter Include="EngCore\Platform\Win">
       <UniqueIdentifier>{5960CB4B-45EF-5415-EE0D-6910DA7B65BB}</UniqueIdentifier>
@@ -39,6 +45,9 @@
     <ClInclude Include="src\EngCore\Events\MouseEvent.h">
       <Filter>EngCore\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\EngCore\ImGui\ImGuiLayer.h">
+      <Filter>EngCore\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\EngCore\Layers\Layer.h">
       <Filter>EngCore\Layers</Filter>
     </ClInclude>
@@ -47,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="src\EngCore\Log.h">
       <Filter>EngCore</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngCore\Platform\OpenGL\OpenGlRenderer.h">
+      <Filter>EngCore\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\EngCore\Platform\Win\WindowWin.h">
       <Filter>EngCore\Platform\Win</Filter>
@@ -61,6 +73,9 @@
     <ClCompile Include="src\EngCore\App.cpp">
       <Filter>EngCore</Filter>
     </ClCompile>
+    <ClCompile Include="src\EngCore\ImGui\ImGuiLayer.cpp">
+      <Filter>EngCore\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\EngCore\Layers\Layer.cpp">
       <Filter>EngCore\Layers</Filter>
     </ClCompile>
@@ -69,6 +84,9 @@
     </ClCompile>
     <ClCompile Include="src\EngCore\Log.cpp">
       <Filter>EngCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngCore\Platform\OpenGL\OpenGlRenderer.cpp">
+      <Filter>EngCore\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\EngCore\Platform\Win\WindowWin.cpp">
       <Filter>EngCore\Platform\Win</Filter>

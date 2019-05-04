@@ -1,5 +1,6 @@
 #include <EngX.h>
 
+
 struct ExampleLayer : EngX::Layer
 {
 	ExampleLayer() : Layer("example") {};
@@ -22,6 +23,7 @@ struct Sandbox : EngX::App
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
+		PushLayer(new EngX::ImGuiLayer());
 	}
 
 	~Sandbox()
