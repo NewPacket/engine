@@ -11,20 +11,31 @@ workspace "Engine"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 currentSysVer = "latest"
 
---Include dirs relative to root folder
-IncludeDir = {}
-IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
-IncludeDir["Glad"] = "Engine/vendor/Glad/include"
-IncludeDir["ImGui"] = "Engine/vendor/DearImGui"
+startproject "Sandbox"
 
-include "Engine/vendor/GLFW"
-include "Engine/vendor/Glad"
-include "Engine/vendor/DearImGui"
+--Include dirs relative to root folder
+engineVendorPath = "Engine/vendor/"
+
+IncludeDir = {}
+IncludeDir["spdlog"] = engineVendorPath .. "spdlog/include"
+IncludeDir["GLFW"]   = engineVendorPath .. "GLFW/include"
+IncludeDir["Glad"]   = engineVendorPath .. "Glad/include"
+IncludeDir["ImGui"]  = engineVendorPath .. "DearImGui"
+IncludeDir["glm"] 	 = engineVendorPath .. "glm"
+
+group "Dependencies"
+	include (engineVendorPath .. "GLFW")
+	include (engineVendorPath .. "Glad")
+	include (engineVendorPath .. "DearImGui")
+group ""
+
+
 
 project "Engine"
 	location "Engine"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir("bin/".. outputdir.."/%{prj.name}")
 	objdir("bin-int/".. outputdir.."/%{prj.name}")
@@ -35,16 +46,19 @@ project "Engine"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}",
 	}
 
 	links
@@ -57,7 +71,6 @@ project "Engine"
 
 	filter  "system:windows" 
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion (currentSysVer)
 
 		defines 
@@ -70,26 +83,29 @@ project "Engine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
 		defines "EX_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
+		buildoptions {"/MDd","/MP"}
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "EX_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
+		buildoptions {"/MP"}
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "EX_DIST"
-		buildoptions "/MD"
+		runtime "Release"
+		buildoptions {"/MP"}
 		optimize "On"
 
-project "sandbox"
-	location "sandbox"
+project "Sandbox"
+	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 
@@ -104,8 +120,8 @@ project "sandbox"
 
 	includedirs
 	{
-		"Engine/vendor/GLFW/include",
-		"Engine/vendor/spdlog/include",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glm}",
 		"Engine/src"
 	}
 
@@ -116,7 +132,6 @@ project "sandbox"
 
 	filter  "system:windows" 
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion (currentSysVer)
 
 		defines 
@@ -126,15 +141,18 @@ project "sandbox"
 
 	filter "configurations:Debug"
 		defines "EX_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
+		buildoptions {"/MDd","/MP"}
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "EX_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
+		buildoptions {"/MP"}
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "EX_DIST"
-		buildoptions "/MD"
+		runtime "Release"
+		buildoptions {"/MP"}
 		optimize "On"

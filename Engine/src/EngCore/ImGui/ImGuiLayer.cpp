@@ -93,8 +93,8 @@ namespace EngX
 		dispatcher.Dispatch<MouseMovedEvent>(EX_BIND_TYPE_EVENT_FN(MouseMovedEvent,OnMouseMovedEvent));
 		dispatcher.Dispatch<MouseScrolledEvent>(EX_BIND_TYPE_EVENT_FN(MouseScrolledEvent,OnMouseScrolledEvent));
 		dispatcher.Dispatch<KeyPressedEvent>(EX_BIND_TYPE_EVENT_FN(KeyPressedEvent,OnKeyPressedEvent));
+		dispatcher.Dispatch<KeyReleasedEvent>(EX_BIND_TYPE_EVENT_FN(KeyReleasedEvent, OnKeyReleasedEvent));
 		dispatcher.Dispatch<KeyTypedEvent>(EX_BIND_TYPE_EVENT_FN(KeyTypedEvent,OnKeyTypedEvent));
-		dispatcher.Dispatch<KeyReleasedEvent>(EX_BIND_TYPE_EVENT_FN(KeyReleasedEvent,OnKeyReleasedEvent));
 		dispatcher.Dispatch<WindowResizeEvent>(EX_BIND_TYPE_EVENT_FN(WindowResizeEvent,OnWindowResizeEvent));
 	}
 

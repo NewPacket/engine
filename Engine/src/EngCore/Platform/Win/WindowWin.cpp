@@ -10,7 +10,7 @@
 
 namespace EngX {
 
-	static bool s_GLFWInitialized = false;
+	static bool glfwInitialized = false;
 
 	static void GLFWErorrCallback(int errorCode, const char* errorDesc)
 	{
@@ -24,15 +24,15 @@ namespace EngX {
 
 	WindowWin::WindowWin(const WindowProps& props)
 	{
-		Init(props);
+		Init_(props);
 	}
 
 	WindowWin::~WindowWin()
 	{
-		Shutdown();
+		Shutdown_();
 	}
 
-	void WindowWin::Init(const WindowProps& props)
+	void WindowWin::Init_(const WindowProps& props)
 	{
 		windowData_.title = props.Title;
 		windowData_.width = props.Width;
@@ -40,14 +40,14 @@ namespace EngX {
 
 		EX_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitialized)
+		if (!glfwInitialized)
 		{
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
 			EX_CORE_ASSERT(success, "Could not intialize GLFW!");
 
 			glfwSetErrorCallback(GLFWErorrCallback);
-			s_GLFWInitialized = true;
+			glfwInitialized = true;
 		}
 
 		window_ = glfwCreateWindow((int)props.Width, (int)props.Height, windowData_.title.c_str(), nullptr, nullptr);
@@ -97,6 +97,12 @@ namespace EngX {
 			};
 		});
 
+		glfwSetCharCallback(window_, [](GLFWwindow* window, unsigned int charCode)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			data.EventCallback(KeyTypedEvent{(int) charCode});
+		});
+
 		glfwSetMouseButtonCallback(window_, [](GLFWwindow * window, int button, int action, int mod)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -129,7 +135,7 @@ namespace EngX {
 		});
 	}
 
-	void WindowWin::Shutdown()
+	void WindowWin::Shutdown_()
 	{
 		glfwDestroyWindow(window_);
 	}

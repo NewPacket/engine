@@ -8,3 +8,6 @@
 [submodule "Engine/vendor/DearImGUI"]
 	path = Engine/vendor/DearImGUI
 	url = https://github.com/NewPacket/imgui
+[submodule "Engine\\vendor\\glm"]
+	path = Engine\\vendor\\glm
+	url = https://github.com/g-truc/glm

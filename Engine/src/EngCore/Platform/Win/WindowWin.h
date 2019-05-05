@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EngCore/Window.h"
+#include "EngCore\Window.h"
 
 
 struct GLFWwindow;
@@ -18,14 +18,15 @@ namespace EngX {
 		inline uint16_t GetWidth() const override { return windowData_.width; }
 		inline uint16_t GetHeight() const override { return windowData_.height; }
 
+		inline void* GetNativePointer() const { return window_; };
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) override { windowData_.EventCallback = callback; }
 		void SetVSync(bool enabled) override;
 
 		bool IsVSync() const override;
 
-		virtual void Init(const WindowProps& props);
-		virtual void Shutdown();
+		virtual void Init_(const WindowProps& props);
+		virtual void Shutdown_();
 
 		
 

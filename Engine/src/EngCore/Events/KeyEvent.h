@@ -64,6 +64,6 @@ namespace EngX {
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(KeyReleased)
+		EVENT_CLASS_TYPE(KeyTyped)
 	};
 }
