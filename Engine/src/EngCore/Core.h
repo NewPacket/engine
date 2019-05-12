@@ -1,12 +1,17 @@
 #pragma once
 
 #ifdef EX_PLATFORM_WIN
+#if EX_DYNAMIC_LIB
 	#ifdef EX_BUILD_DLL
 		#define EX_API __declspec(dllexport)
 	#else
 		#define EX_API __declspec(dllimport)
 	#endif
+#else 
+	#define EX_API
+#endif
 #else
+
 	#error Only for Win
 #endif
 
@@ -18,4 +23,5 @@
 	#define EX_CORE_ASSERT(x, ...)
 #endif
 
+#define EX_BIND_TYPE_EVENT_FN(type, fn) [this](type& e){ return fn(e); }
 #define BIT(x) (1 << x)

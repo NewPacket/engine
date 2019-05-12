@@ -1,9 +1,14 @@
 #include <EngX.h>
 
+#include <imgui.h>
 
 struct ExampleLayer : EngX::Layer
 {
 	ExampleLayer() : Layer("example") {};
+
+	void OnAttach() 
+	{
+	}
 
 	void OnUpdate() override
 	{
@@ -15,6 +20,13 @@ struct ExampleLayer : EngX::Layer
 		EX_TRACE("{0}", event);
 	}
 
+	void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
+	}
+
 };
 
 
@@ -23,7 +35,6 @@ struct Sandbox : EngX::App
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
-		PushLayer(new EngX::ImGuiLayer());
 	}
 
 	~Sandbox()

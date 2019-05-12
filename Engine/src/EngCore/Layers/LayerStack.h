@@ -25,7 +25,7 @@ namespace EngX {
 		LayersIter end()   { return layers.end(); };
 
 		LayerVector layers;
-		LayersIter layersInsert;
+		int layersInsertIndex_;
 	};
 
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include "EngCore\Core.h"
 #include "EngCore\Events\Event.h"
-#include <string>
 
 namespace EngX {
 
@@ -14,6 +13,7 @@ namespace EngX {
 		virtual void OnDetach() {};
 		virtual void OnUpdate() {};
 		virtual void OnEvent(Event& event) {};
+		virtual void OnImGuiRender() {};
 
 		inline const std::string& DbgGetName() const { return debugName; }
 

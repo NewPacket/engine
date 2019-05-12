@@ -5,7 +5,7 @@ namespace EngX {
 
 	LayerStack::LayerStack()
 	{
-		layersInsert = layers.begin();
+		layersInsertIndex_ = 0;
 	}
 
 	LayerStack::~LayerStack() 
@@ -17,7 +17,8 @@ namespace EngX {
 
 	void LayerStack::PushLayer(Layer* layer) 
 	{
-		layersInsert = layers.emplace(layersInsert, layer);
+		layers.emplace(layers.begin() + layersInsertIndex_, layer);
+		++layersInsertIndex_;
 	}
 	void LayerStack::PushOverlay(Layer* overlay)
 	{
@@ -30,7 +31,7 @@ namespace EngX {
 		if (it != layers.end())
 		{
 			layers.erase(it);
-			layersInsert--;
+			--layersInsertIndex_;
 		}
 	}
 

@@ -1,8 +1,6 @@
 #pragma once
 #include "Event.h"
 
-#include <sstream>
-
 namespace EngX {
 
 	struct EX_API WindowResizeEvent : Event

@@ -11,24 +11,19 @@ namespace EngX {
 	struct EX_API ImGuiLayer : Layer
 	{
 		ImGuiLayer();
-		virtual ~ImGuiLayer();
+		~ImGuiLayer();
 
 
-		void OnAttach() override;
-		void OnDetach() override;
-		void OnUpdate() override;
-		void OnEvent(Event& event) override;
+		virtual void OnAttach() override;
+		virtual void OnDetach() override;
+		virtual void OnUpdate() override;
 
-		bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-		bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-		bool OnMouseMovedEvent(MouseMovedEvent& e);
-		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
-		bool OnKeyPressedEvent(KeyPressedEvent& e);
-		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-		bool OnKeyTypedEvent(KeyTypedEvent& e);
-		bool OnWindowResizeEvent(WindowResizeEvent& e);
+		virtual void OnImGuiRender() override;
 
-		float workingTime{ 0.0f };
+		void BeginFrame();
+		void EndFrame();
+
+		float workingTime_ { 0.0f };
 	};
 
 }

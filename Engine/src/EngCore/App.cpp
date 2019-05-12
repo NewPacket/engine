@@ -2,6 +2,7 @@
 #include "App.h"
 
 #include <glad\glad.h>
+#include <imgui.h>
 
 namespace EngX {
 
@@ -14,6 +15,9 @@ namespace EngX {
 		windowHandle_ = std::unique_ptr<Window>(Window::Create());
 		windowHandle_->SetEventCallback([this](Event& e) { OnEvent(e); });
 		appInstance_ = this;
+
+		imguiLayer_ = new ImGuiLayer();
+		PushOverLay(imguiLayer_);
 	}
 
 
@@ -25,7 +29,7 @@ namespace EngX {
 	int App::Run() 
 	{
 		WindowResizeEvent e {1200, 720};
-		EX_TRACE(e);
+		EX_TRACE("{0}",e);
 		while (running_)
 		{
 			glClearColor(0,0,1,1);
@@ -33,6 +37,13 @@ namespace EngX {
 
 			for (Layer* layer : layerStack_)
 				layer->OnUpdate();
+
+			imguiLayer_->BeginFrame();
+			ImGui::Text("Hello World");
+			for (Layer* layer : layerStack_)
+				layer->OnImGuiRender();
+
+			imguiLayer_->EndFrame();
 
 			windowHandle_->OnUpdate();
 		}

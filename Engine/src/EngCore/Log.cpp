@@ -1,6 +1,5 @@
 #include "eng_pch.h"
 
-
 namespace EngX {
 
 	std::shared_ptr<spdlog::logger> Log::core_logger;
