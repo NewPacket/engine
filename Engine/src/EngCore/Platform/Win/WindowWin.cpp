@@ -5,7 +5,8 @@
 #include "EngCore\Events\KeyEvent.h"
 #include "EngCore\Events\MouseEvent.h"
 
-#include <glad\glad.h>
+#include "EngCore\Platform\OpenGL\OpenGLContext.h"
+
 #include <GLFW\glfw3.h>
 
 namespace EngX {
@@ -40,6 +41,8 @@ namespace EngX {
 
 		EX_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
+		
+
 		if (!glfwInitialized)
 		{
 			// TODO: glfwTerminate on system shutdown
@@ -51,9 +54,10 @@ namespace EngX {
 		}
 
 		window_ = glfwCreateWindow((int)props.Width, (int)props.Height, windowData_.title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(window_);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		EX_CORE_ASSERT(status, "Failed to initialize Glad");
+
+		context_ = new OpenGLContext(window_);
+		context_->Init();
+		//|^
 		glfwSetWindowUserPointer(window_, &windowData_);
 		SetVSync(true);
 
@@ -143,7 +147,8 @@ namespace EngX {
 	void WindowWin::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(window_);
+		context_->SwapBuffers();
+
 	}
 
 	void WindowWin::SetVSync(bool enabled)

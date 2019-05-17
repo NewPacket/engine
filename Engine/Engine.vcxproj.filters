@@ -19,8 +19,14 @@
     <Filter Include="src\EngCore\Platform">
       <UniqueIdentifier>{73469B05-5FD5-24CF-08F4-38CAF4613575}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\EngCore\Platform\OpenGL">
+      <UniqueIdentifier>{47D05F4D-B3DD-8D33-3CC4-891EA8D059EA}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\EngCore\Platform\Win">
       <UniqueIdentifier>{D08D0A56-BCB2-59D6-E5FD-3E66D18158F4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\EngCore\Renderer">
+      <UniqueIdentifier>{C54D78E0-B1DC-01AA-5AFB-15A546691250}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -87,11 +93,17 @@
     <ClInclude Include="src\EngCore\MouseCodes.h">
       <Filter>src\EngCore</Filter>
     </ClInclude>
+    <ClInclude Include="src\EngCore\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\EngCore\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\EngCore\Platform\Win\WinInput.h">
       <Filter>src\EngCore\Platform\Win</Filter>
     </ClInclude>
     <ClInclude Include="src\EngCore\Platform\Win\WindowWin.h">
       <Filter>src\EngCore\Platform\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EngCore\Renderer\GraphicsContext.h">
+      <Filter>src\EngCore\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\EngCore\Window.h">
       <Filter>src\EngCore</Filter>
@@ -1213,6 +1225,9 @@
     </ClCompile>
     <ClCompile Include="src\EngCore\Log.cpp">
       <Filter>src\EngCore</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EngCore\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\EngCore\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\EngCore\Platform\Win\WinInput.cpp">
       <Filter>src\EngCore\Platform\Win</Filter>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "EngCore\Window.h"
-
+#include "EngCore\Renderer\GraphicsContext.h"
 
 struct GLFWwindow;
 
@@ -40,6 +40,7 @@ namespace EngX {
 		} windowData_;
 
 		GLFWwindow* window_;
+		GraphicsContext* context_;
 	};
 
 }

@@ -157,8 +157,10 @@
     <ClInclude Include="src\EngCore\Layers\LayerStack.h" />
     <ClInclude Include="src\EngCore\Log.h" />
     <ClInclude Include="src\EngCore\MouseCodes.h" />
+    <ClInclude Include="src\EngCore\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\EngCore\Platform\Win\WinInput.h" />
     <ClInclude Include="src\EngCore\Platform\Win\WindowWin.h" />
+    <ClInclude Include="src\EngCore\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\EngCore\Window.h" />
     <ClInclude Include="src\EngX.h" />
     <ClInclude Include="src\eng_pch.h" />
@@ -534,6 +536,7 @@
     <ClCompile Include="src\EngCore\Layers\Layer.cpp" />
     <ClCompile Include="src\EngCore\Layers\LayerStack.cpp" />
     <ClCompile Include="src\EngCore\Log.cpp" />
+    <ClCompile Include="src\EngCore\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\EngCore\Platform\Win\WinInput.cpp" />
     <ClCompile Include="src\EngCore\Platform\Win\WindowWin.cpp" />
     <ClCompile Include="src\eng_pch.cpp">
@@ -554,4 +557,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project>
+</Project> 
